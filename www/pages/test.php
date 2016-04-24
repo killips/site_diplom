@@ -10,7 +10,13 @@
   <title>Тест</title>
 </head>
   <body>
-    <?php require_once "../block/header.php"; ?>
+    <?php require_once "../block/header.php";
+    global $arg;
+      $arg = selectTest();
+      //echo $arg;
+
+    //  echo $arg[1]
+    ?>
     <section>
       <div class="content">
         <div class="container">
@@ -18,15 +24,17 @@
             <thead>
               <tr>
                 <th>Название</th>
-                <th>Описание</th>
                 <th width="120px">Направление</th>
                 <th>Дисциплина</th>
-                <th width="80px">Автор</th>
-                <th>Вопросов</th>
               </tr>
             </thead>
             <tbody>
-              <tr id_test="1">
+              <?php
+              for ($i=0; $i<count($arg); $i++){
+                include "tableTest.php";
+              }
+              ?>
+              <!--<tr id_test="1">
                 <td class="click_test">Тестовые задания для комплекстной контрольной</td>
                 <td class="click_test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae rerum voluptatem magnam dolore animi sunt ut sequi molestiae, commodi, inventore quidem aliquid labore eligendi similique explicabo aspernatur unde voluptates fuga!</td>
                 <td class="click_test tdcenter">09.03.01</td>
@@ -41,7 +49,7 @@
                 <td class="click_test">Архитектура вычислительных машин</td>
                 <td class="click_test">Волкова Т.В.</td>
                 <td class="click_test tdcenter">20</td>
-              </tr>
+              </tr>-->
             </tbody>
           </table>
         </div>

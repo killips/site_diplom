@@ -11,7 +11,9 @@
   </head>
   <body>
     <?php require_once "block/header.php"; ?>
-    <div class="content"></div>
+    <div  class="mainpage">
+      <img src="/img/planet.png" alt="cat" width="100%" />
+    </div>
     <?php require_once "block/footer.php"; ?>
   </body>
 </html>
