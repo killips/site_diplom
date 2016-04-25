@@ -4,7 +4,7 @@
 	$password=htmlspecialchars($_POST["password"]);
 	$password=md5($password);
 	if(isUser($nick, $password)){
-	$result=$mysqli->query("SELECT id_user, name, surname FROM user,teacher WHERE ((`email`='$nick' OR `nick_name`='$nick') AND `password`='$password') AND user.id_user=teacher.id_teacher ");
+	$result=$mysqli->query("SELECT id_user, name, surname FROM user WHERE ((`email`='$nick' OR `nick_name`='$nick') AND `password`='$password') ");
 	$row=$result->fetch_assoc();
 	//$req=$row['id_user'];
 	//$result=$mysqli->query("SELECT DISTINCT name FROM teacher WHERE `id_teacher`='$req' ");

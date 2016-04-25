@@ -5,7 +5,7 @@
 
   $data = (int)$_POST["data"];
 
-  $stmt = $mysqli->prepare("SELECT id_chair AS id, name AS title FROM chair WHERE id_faculty=?");
+  $stmt = $mysqli->prepare("SELECT id_chair AS id, name_chair AS title FROM chair WHERE id_faculty=?");
   $stmt->bind_param("i", $data);
   $stmt->execute();
 

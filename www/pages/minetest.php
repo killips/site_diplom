@@ -3,6 +3,8 @@
 		header("Location: /index.php");
 		exit;
 	}
+	global $arg;
+	$arg = selectTest();
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,8 +21,8 @@
     <div class="col-md-2 pull-right">
       <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
           <ul class="nav nav-pills nav-stacked" style=" border:1px solid #eb6864; border-radius:4px;"> <!--Исправить!!!-->
-            <li class="active"><a href="#">Моих тестов:<span class="badge">3</span></a></li>
-            <li><a href="#">Создать новый тест</a></li>
+            <li class="active"><a href="#">Моих тестов:<span class="badge"><?php echo count($arg);?></span></a></li>
+            <li><a href="/pages/newtest.php">Создать новый тест</a></li>
             <li class=""><a href="#">Удалить тест</a></li>
           </ul>
       </div>
@@ -32,6 +34,40 @@
 			  <li class="active">Мои тесты</li>
 			</ul>
 
+			<table class="table table-responsive table-striped ">
+				<thead>
+					<tr>
+						<th>Название</th>
+						<th width="120px">Направление</th>
+						<th>Дисциплина</th>
+						<th>Автор</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					for ($i=0; $i<count($arg); $i++){
+						$name_author=getAllUser($arg[$i]["id_author"]);
+						include "tableTest.php";
+					}
+					?>
+					<!--<tr id_test="1">
+						<td class="click_test">Тестовые задания для комплекстной контрольной</td>
+						<td class="click_test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae rerum voluptatem magnam dolore animi sunt ut sequi molestiae, commodi, inventore quidem aliquid labore eligendi similique explicabo aspernatur unde voluptates fuga!</td>
+						<td class="click_test tdcenter">09.03.01</td>
+						<td class="click_test">Архитектура вычислительных машин</td>
+						<td class="click_test">Волкова Т.В.</td>
+						<td class="click_test tdcenter">20</td>
+					</tr>
+					<tr id_test="2">
+						<td class="click_test">Тестовые задания для комплекстной контрольной</td>
+						<td class="click_test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae rerum voluptatem magnam dolore animi sunt ut sequi molestiae, commodi, inventore quidem aliquid labore eligendi similique explicabo aspernatur unde voluptates fuga!</td>
+						<td class="click_test tdcenter">09.03.01</td>
+						<td class="click_test">Архитектура вычислительных машин</td>
+						<td class="click_test">Волкова Т.В.</td>
+						<td class="click_test tdcenter">20</td>
+					</tr>-->
+				</tbody>
+			</table>
 
 
     </div>

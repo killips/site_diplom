@@ -10,12 +10,10 @@
   <title>Тест</title>
 </head>
   <body>
-    <?php require_once "../block/header.php";
-    global $arg;
+    <?php
+      require_once "../block/header.php";
+      global $arg;
       $arg = selectTest();
-      //echo $arg;
-
-    //  echo $arg[1]
     ?>
     <section>
       <div class="content">
@@ -26,11 +24,13 @@
                 <th>Название</th>
                 <th width="120px">Направление</th>
                 <th>Дисциплина</th>
+                <th>Автор</th>
               </tr>
             </thead>
             <tbody>
               <?php
               for ($i=0; $i<count($arg); $i++){
+                $name_author=getAllUser($arg[$i]["id_author"]);
                 include "tableTest.php";
               }
               ?>
