@@ -77,10 +77,10 @@
     }
     return $success_first && $success_second;
   }
-  function addTest(){
+  function addThemeTest($id_subject,$name_theme,$num_theme,$id_user){
+    //Добавляет новую тему теста
     global $mysqli;
-    $success = $mysqli->query("INSERT INTO `teacher` (`id_teacher` `name`, `lastname`, `surname`, `science_degree`, `academic_rank`) VALUES ('$id_user', '$name', '$lastname','$surname','$science_degree', '$academic_rank') ");
-    $success = $mysqli->query("INSERT INTO `teache_chair` (`id_chair`, `id_teacher`, `position`) VALUES ('$id_chair', '$id_user', '$position') ");
+    $success = $mysqli->query("INSERT INTO `theme`(`id_subject`, `name_theme`, `num_theme`, `id_author`) VALUES ('$id_subject','$name_theme','$num_theme','$id_user')");
     return $success;
   }
   function selectTest(){
@@ -88,13 +88,63 @@
     global $mysqli;
     $result = $mysqli->query("SELECT * FROM `subject`,`theme`,`specialty` WHERE subject.id_subject=theme.id_subject AND subject.id_specialty=specialty.id_specialty ");
     return resultSetToArray($result);
-  //  SELECT * FROM `subject`,`theme`,`specialty` WHERE subject.id_subject=theme.id_subject AND subject.id_specialty=specialty.id_specialty
-  //SELECT * FROM `subject`,`theme`,`specialty`,`teacher_subject`,`teacher` WHERE subject.id_subject=theme.id_subject AND subject.id_specialty=specialty.id_specialty=teacher_subject.id_specialty AND teacher.id_teacher=teacher_subject.id_teacher
-  }
+    }
   function selectTestAuthor($id_author){
     global $mysqli;
     $result = $mysqli->query("SELECT * FROM `subject`,`theme`,`specialty` WHERE subject.id_subject=theme.id_subject AND subject.id_specialty=specialty.id_specialty AND theme.id_author='$id_author' ");
     return resultSetToArray($result);
   }
-  /*INSERT INTO chair VALUES ('2','2','Информационные техналогии и компьютерные системы', 'ИТиКС', 'кафедра ИТиКС СГУ') это запрос к таблице с кафедрами*/
+  function selectAllTestAndQuestion($id_theme){
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM `question` WHERE `id_theme`='$id_theme'");
+    //$row = $result->fetch_assoc();
+    return resultSetToArray($result);
+  }
+  function selectAllAnswerInQuestion($id_question){
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM `answer` WHERE `id_question`='$id_question'");
+    //$result=$result->fetch_assoc();
+    return resultSetToArray($result);
+  }
+  function getAllSpecialty($id_chair){
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM `specialty` WHERE `id_chair`='$id_chair'");
+    //$result=$result->fetch_assoc();
+    return resultSetToArray($result);
+  }
+  function getAllTeacher_chair($id_user){
+    global $mysqli;
+    $result = $mysqli->query("SELECT * FROM `teacher_chair` WHERE `id_teacher`='$id_user'");
+    $result=$result->fetch_assoc();
+    return $result;
+  }
+  function setAllQuestion($id_theme,$text_question,$num_true_answer){
+    global $mysqli;
+    $num_question = $mysqli->query("SELECT MAX(`num_question`) FROM `question` WHERE `id_theme`='$id_theme'");
+    $num_question = $num_question->fetch_assoc();
+    if(!isset($num_question)){
+    $success = $mysqli->query("INSERT INTO `question`(`id_theme`, `text_question`, `num_question`, `num_true_answer`) VALUES ('$id_theme','$text_question','1','$num_true_answer')");
+      }else{
+    $success = $mysqli->query("INSERT INTO `question`(`id_theme`, `text_question`, `num_question`, `num_true_answer`) VALUES ('$id_theme','$text_question','($num_question+1)','$num_true_answer')");
+    }
+    return $success;
+  }
+  function selectId_Question($id_theme,$text_question){
+    global $mysqli;
+    $result = $mysqli->query("SELECT `id_question` FROM `question` WHERE `id_theme`='$id_theme' AND `text_question`='$text_question'");
+    $result=$result->fetch_assoc();
+    return $result;
+  }
+  function setAllAnswer($id_question,$text_answer,$num_answer){
+    global $mysqli;
+    $success = $mysqli->query("INSERT INTO `answer`(`id_question`, `text_answer`, `num_answer`) VALUES ('$id_question','$text_answer','$num_answer')");
+    //$result=$result->fetch_assoc();
+    return $success;
+  }
+  function deleteTest($id_theme){
+    global $mysqli;
+    //$sucessfirst = $mysqli->query("DELETE FROM `question` WHERE `id_theme`='$id_theme'");
+    $successsecond = $mysqli->query("DELETE FROM `theme` WHERE `id_theme`='$id_theme'");
+    return /*$sucessfirst &&*/ $successsecond;
+  }
 ?>

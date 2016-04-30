@@ -29,27 +29,18 @@
             </thead>
             <tbody>
               <?php
+            //  if (isset($_GET['id'])) {
+            //    $article = getArticle((int)$_GET["id"]);
+            //    require_once "../blocks/full_article.php";
+            //  }else require_once "../blocks/list_articles.php";s
+              ?>
+
+              <?php
               for ($i=0; $i<count($arg); $i++){
                 $name_author=getAllUser($arg[$i]["id_author"]);
                 include "tableTest.php";
               }
               ?>
-              <!--<tr id_test="1">
-                <td class="click_test">Тестовые задания для комплекстной контрольной</td>
-                <td class="click_test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae rerum voluptatem magnam dolore animi sunt ut sequi molestiae, commodi, inventore quidem aliquid labore eligendi similique explicabo aspernatur unde voluptates fuga!</td>
-                <td class="click_test tdcenter">09.03.01</td>
-                <td class="click_test">Архитектура вычислительных машин</td>
-                <td class="click_test">Волкова Т.В.</td>
-                <td class="click_test tdcenter">20</td>
-              </tr>
-              <tr id_test="2">
-                <td class="click_test">Тестовые задания для комплекстной контрольной</td>
-                <td class="click_test">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae rerum voluptatem magnam dolore animi sunt ut sequi molestiae, commodi, inventore quidem aliquid labore eligendi similique explicabo aspernatur unde voluptates fuga!</td>
-                <td class="click_test tdcenter">09.03.01</td>
-                <td class="click_test">Архитектура вычислительных машин</td>
-                <td class="click_test">Волкова Т.В.</td>
-                <td class="click_test tdcenter">20</td>
-              </tr>-->
             </tbody>
           </table>
         </div>

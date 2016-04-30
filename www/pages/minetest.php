@@ -4,7 +4,7 @@
 		exit;
 	}
 	global $arg;
-	$arg = selectTest();
+	$arg = selectTestAuthor($_SESSION["id_user"]);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -23,7 +23,8 @@
           <ul class="nav nav-pills nav-stacked" style=" border:1px solid #eb6864; border-radius:4px;"> <!--Исправить!!!-->
             <li class="active"><a href="#">Моих тестов:<span class="badge"><?php echo count($arg);?></span></a></li>
             <li><a href="/pages/newtest.php">Создать новый тест</a></li>
-            <li class=""><a href="#">Удалить тест</a></li>
+						<li><a href="/pages/newquestiontest.php">Добавить вопрос к тесту</a></li>
+            <li><a href="/pages/deletetest.php">Удалить тест</a></li>
           </ul>
       </div>
     </div>

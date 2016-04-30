@@ -1,5 +1,5 @@
 <div class="footer">
-  <div class="footercontent">
+  <div class="container">
     <div class="copyright">
       <span>2016 СевГУ. Все права защищены.</span>
     </div>
@@ -24,6 +24,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    //для главной менюшки
     $(document).ready(function(){
       //$(".mynav li a[href*='#']").parents().addClass('active');
       var loc = window.location.pathname;
@@ -37,6 +38,7 @@
     });
     </script>
 <script>
+//добавление информации об институтах и кафедрах..
     $(document).ready(function(){
       // вешаем на клик по элементу с id = example-1
         $("#select_but1").change(function(){
@@ -69,6 +71,46 @@
               }else{
                 $("#select_chair").append("<option value='" + result[i]["id"] + "' selected>" + result[i]["title"] + "</option>");
               }
+            }
+           });
+        });
+
+     });
+</script>
+
+<script>
+  //добавление специальностей кафедры и предметов этих специальностей на страницу с добавлением тестов
+    $(document).ready(function(){
+      // вешаем на клик по элементу с id = example-1
+        $("#select_but_new_test").change(function(){
+          var out = $("select#select_but_new_test").val();
+           $.post("/ajax/ajaxtest.php", { data:out }, function(result) {
+            //   $("#par1").html(result);
+            console.log(result);
+            $("#select_subject").empty();
+            result = JSON.parse(result);
+            for (var i=0; i<result.length; i++) {
+              console.log(result[i]);
+              $("#select_subject").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
+            }
+           });
+        });
+
+        $("#select_but_new_test").ready(function(){
+          var out = $("select#select_but_new_test").val();
+          console.log(selected);
+           $.post("/ajax/ajaxtest.php", { data:out }, function(result) {
+            //   $("#par1").html(result);
+            console.log(result);
+            $("#select_subject").empty();
+            result = JSON.parse(result);
+            for (var i=0; i<result.length; i++) {
+              console.log(result[i]);
+            //  if(selected!=result[i]["id"]){
+                $("#select_subject").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
+            //  }else{
+            //    $("#select_subject").append("<option value='" + result[i]["id"] + "' selected>" + result[i]["title"] + "</option>");
+          //    }
             }
            });
         });
