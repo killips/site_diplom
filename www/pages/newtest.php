@@ -2,7 +2,14 @@
 	if(isset($_SESSION['id_user'])==false){
 		header("Location: /index.php");
 		exit;
+	}else{
+		$inspection = getTeacherChair($_SESSION["id_user"]);
+		if(!isset($inspection["position"]) & !isset($inspection["id_chair"]) & !isset($inspection["id_teacher"]) & !isset($inspection["id_teacher_chair"])){
+			header("Location: /pages/office.php");
+			exit;
+		}
 	}
+
 	global $arg;
 	$arg = selectTestAuthor($_SESSION["id_user"]);
 ?>

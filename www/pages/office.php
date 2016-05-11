@@ -1,7 +1,13 @@
 <?php require_once "../block/start.php";
+	$danger=false;
 	if(isset($_SESSION['id_user'])==false){
 		header("Location: /index.php");
 		exit;
+	}else{
+		$inspection = getTeacherChair($_SESSION["id_user"]);
+		if(!isset($inspection["position"]) & !isset($inspection["id_chair"]) & !isset($inspection["id_teacher"]) & !isset($inspection["id_teacher_chair"])){
+			$danger=true;
+		}
 	}
 global $workarg;
 $workarg = getTeacherChair($_SESSION["id_user"]);
@@ -18,6 +24,11 @@ if (!empty($_POST["btn_all_data"])) {
 	$position=htmlspecialchars($_POST["position"]);
 	$id_chair=htmlspecialchars($_POST["id_chair"]);
 	$lol = allData($_SESSION["id_user"], $name, $lastname, $surname, $science_degree, $academic_rank, $id_chair, $position, $argChair["id_faculty"]);
+	if (!$lol){ $alert="Ошибка при изменении личных данных!"; }else{
+							$alert="Вы успешно изменили личные данные!";
+							$danger=false;
+		}
+		include "../block/alert.php";
 }
 $workarg = getTeacherChair($_SESSION["id_user"]);
 $argChair = getChair($workarg["id_chair"]);
@@ -41,7 +52,13 @@ $workline = getAllUser($_SESSION['id_user']);
 			  <li><a href="#"><?php echo $workline['surname']." ".$workline['name'];?></a></li>
 			  <li class="active">Личный кабинет</li>
 			</ul>
-
+			<?php if($danger) echo  "<div class='container'>
+			<div class='alert alert-dismissible alert-danger'>
+						<button type='button' class='close' data-dismiss='alert'>&times;</button>
+						<h4>Внимание! Вы не указали все данные о себе.</h4>
+						<p>Укажите все данные о себе, иначе вы не сможете создавать новые тесты.</p>
+					</div>
+					</div>"; ?>
 			<form class="form-horizontal" action="" method="POST">
 				<fieldset>
 					<legend>Здравствуйте <?php echo $workline['name']; ?></legend>

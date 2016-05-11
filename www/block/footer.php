@@ -45,11 +45,11 @@
           var out = $("select#select_but1").val();
            $.post("/ajax/bd.php", { data:out }, function(result) {
             //   $("#par1").html(result);
-            console.log(result);
+        //    console.log(result);
             $("#select_chair").empty();
             result = JSON.parse(result);
             for (var i=0; i<result.length; i++) {
-              console.log(result[i]);
+          //    console.log(result[i]);
               $("#select_chair").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
             }
            });
@@ -58,14 +58,14 @@
         $("#select_but1").ready(function(){
           var out = $("select#select_but1").val();
           var selected = '<?php echo $argChair["id_chair"]; ?>';
-          console.log(selected);
+        //  console.log(selected);
            $.post("/ajax/bd.php", { data:out }, function(result) {
             //   $("#par1").html(result);
-            console.log(result);
+        //    console.log(result);
             $("#select_chair").empty();
             result = JSON.parse(result);
             for (var i=0; i<result.length; i++) {
-              console.log(result[i]);
+            //  console.log(result[i]);
               if(selected!=result[i]["id"]){
                 $("#select_chair").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
               }else{
@@ -86,11 +86,11 @@
           var out = $("select#select_but_new_test").val();
            $.post("/ajax/ajaxtest.php", { data:out }, function(result) {
             //   $("#par1").html(result);
-            console.log(result);
+            //console.log(result);
             $("#select_subject").empty();
             result = JSON.parse(result);
             for (var i=0; i<result.length; i++) {
-              console.log(result[i]);
+            //  console.log(result[i]);
               $("#select_subject").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
             }
            });
@@ -98,14 +98,14 @@
 
         $("#select_but_new_test").ready(function(){
           var out = $("select#select_but_new_test").val();
-          console.log(selected);
+          //console.log(selected);
            $.post("/ajax/ajaxtest.php", { data:out }, function(result) {
             //   $("#par1").html(result);
-            console.log(result);
+            //console.log(result);
             $("#select_subject").empty();
             result = JSON.parse(result);
             for (var i=0; i<result.length; i++) {
-              console.log(result[i]);
+              //console.log(result[i]);
             //  if(selected!=result[i]["id"]){
                 $("#select_subject").append("<option value='" + result[i]["id"] + "'>" + result[i]["title"] + "</option>");
             //  }else{

@@ -22,7 +22,7 @@
             <li><a href='/pages/minetest.php'>Мои тесты</a></li>
           </ul>
         </li>" ?>
-        <li><a href="/pages/ourcontact.php">Контакты</a></li>
+        <li><a href="/pages/ourcontact.php">Обратная связь</a></li>
       </ul>
       <!--<form class="navbar-form navbar-left" role="search">
         <div class="form-group">
